@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+    <mat-label>日</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let d of dateList" [value]="d">
+          {{ d }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
