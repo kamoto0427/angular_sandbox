@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill">
     <mat-label>月</mat-label>
-    <mat-select (selectionChange)="onSelectChangeMonth($event)">
+    <mat-select [(value)]="selected" (selectionChange)="onSelectChangeMonth($event)">
       <mat-option *ngFor="let m of monthList" [value]="m">
           {{ m }}
       </mat-option>

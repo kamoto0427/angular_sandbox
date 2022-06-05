@@ -10,6 +10,7 @@ export class BirthMonthComponent implements OnInit {
   @Output() selectedMonth = new EventEmitter<string>();
 
   public monthList: String[] = [];
+  public selected: string = '04';
 
   constructor() { }
 
