@@ -1,0 +1,49 @@
+<form [formGroup]="userRegisterForm">
+    <div>
+        <mat-form-field>
+            <mat-label>姓(セイ)</mat-label>
+            <input matInput type="text" [formControl]="firstName" placeholder="ヤマダ"/>
+            <mat-error *ngIf="firstName.errors?.['requiredInCaseCardNumberInput']">{{ getFirstNameErrorMessage() }}</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>名(メイ)</mat-label>
+            <input matInput type="text" [formControl]="lastName" placeholder="タロウ"/>
+            <mat-error *ngIf="lastName.errors?.['requiredInCaseCardNumberInput']">{{ getLastNameErrorMessage() }}</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>電話番号</mat-label>
+            <input matInput type="text" [formControl]="phone" placeholder="09011112222"/>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>カード番号</mat-label>
+            <input matInput type="text" [formControl]="cardNumber" placeholder="123412341234"/>
+            <mat-error *ngIf="cardNumber.invalid">{{ getCardNumberErrorMessage() }}</mat-error>
+            <mat-hint>カード番号を入力する場合は、姓(セイ)、名(メイ)、生年月日は必須です。カード登録と同じものを入力してください。</mat-hint>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>パスワード</mat-label>
+            <input matInput type="text" [formControl]="password" placeholder="Aa123!"/>
+            <mat-error></mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>パスワード確認用</mat-label>
+            <input matInput type="text" [formControl]="passwordConfirm" placeholder="パスワードが一致するように入力してください。"/>
+            <mat-error *ngIf="passwordConfirm.invalid">{{ getPasswordConfirmError() }}</mat-error>
+        </mat-form-field>
+    </div>
+</form>
