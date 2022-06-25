@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { CustomValidator } from '../validator/custom-validator';
+
+export class TamarunErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl): boolean {
+    return control && control.invalid;
+  }
+}
 
 @Component({
   selector: 'app-user-register',
@@ -8,16 +15,15 @@ import { CustomValidator } from '../validator/custom-validator';
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit {
+  public matcher = new TamarunErrorStateMatcher();
 
-  public userRegisterForm: FormGroup;
+  public formGroup: FormGroup;
   public firstName: FormControl;
-  public lastName: FormControl;
-  public phone: FormControl;
+  public tel: FormControl;
+  public birthYear: FormControl;
+  public birthMonth: FormControl;
+  public birthDate: FormControl;
   public cardNumber: FormControl;
-  public password: FormControl;
-  public passwordConfirm: FormControl;
-
-  public value: string;
 
   constructor(
     private fb: FormBuilder,
@@ -26,67 +32,59 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstName = new FormControl();
-    this.lastName = new FormControl();
-    this.phone = new FormControl();
-    this.cardNumber = new FormControl('', [
-      Validators.required,
-    ]);
-    this.password = new FormControl('', [
-      Validators.required
-    ]);
-    this.passwordConfirm = new FormControl('', [
-      Validators.required
-    ]);
+    this.tel = new FormControl();
+    this.birthYear = new FormControl();
+    this.birthMonth = new FormControl();
+    this.birthDate = new FormControl();
+    this.cardNumber = new FormControl();
 
-
-    this.userRegisterForm = this.fb.group({
+    this.formGroup = this.fb.group({
       firstName: this.firstName,
-      lastName: this.lastName,
-      phone: this.phone,
-      cardNumber: this.cardNumber,
-      password: this.password,
-      passwordConfirm: this.passwordConfirm
-    },
-    {
-      validators: [
-        CustomValidator.isPasswordMatch,
-        CustomValidator.requiredInCaseCardNumberInput
-      ]
-    });
+      tel: this.tel,
+      birthYear: this.birthYear,
+      birthMonth: this.birthMonth,
+      birthDate: this.birthDate,
+      cardNumber: this.cardNumber
+    }, { validators: CustomValidator.requiredInCaseCardNumberInput });
+
+    this.cardNumberValueChanges();
   }
 
-  public getFirstNameErrorMessage() {
-    if (this.firstName.hasError('requiredInCaseCardNumberInput')) {
-        return 'カード番号入力時は、必須項目です。';
+  public cardNumberValueChanges() {
+    this.cardNumber.valueChanges.subscribe((cardNumber: string) => {
+      console.log(this.birthYear);
+      if (cardNumber !== null && cardNumber !== '' && cardNumber !== 'null') {
+        if (this.firstName.value === null || this.firstName.value === '' || this.firstName.value === 'null') {
+          this.firstName.setValidators([Validators.required]);
+        }
+
+        if (this.tel.value === null || this.tel.value === '' || this.tel.value === 'null') {
+          this.tel.setValidators([Validators.required]);
+        }
+
+        if (this.birthYear.value === null || this.birthYear.value === '' || this.birthYear.value === 'null') {
+          this.birthYear.setValidators([Validators.required]);
+        }
+
+        if (this.birthMonth.value === null || this.birthMonth.value === '' || this.birthMonth.value === 'null') {
+          this.birthMonth.setValidators([Validators.required]);
+        }
+
+        if (this.birthDate.value === null || this.birthDate.value === '' || this.birthDate.value === 'null') {
+          this.birthDate.setValidators([Validators.required]);
+        }
+      } else {
+        this.firstName.clearValidators();
+        this.tel.clearValidators();
+        this.birthYear.clearValidators();
+        this.birthMonth.clearValidators();
+        this.birthDate.clearValidators();
       }
-    return '';
-  }
-
-  public getLastNameErrorMessage() {
-    if (this.lastName.hasError('requiredInCaseCardNumberInput')) {
-      return 'カード番号入力時は、必須項目です。';
-    }
-    return '';
-  }
-
-  public getCardNumberErrorMessage() {
-    if (this.cardNumber.hasError('required')) {
-      return '必須です';
-    }
-
-    if (this.cardNumber.hasError('isLongEnough')) {
-      return '5文字以内で入力してください';
-    }
-    return ''
-  }
-
-  public getPasswordConfirmError() {
-    if (this.passwordConfirm.hasError('required')) {
-      return '必須です';
-    }
-    if (this.passwordConfirm.hasError('unmatchPassword')) {
-      return 'パスワードが一致しませんでした。'
-    }
-    return '';
+      this.firstName.updateValueAndValidity();
+      this.tel.updateValueAndValidity();
+      this.birthYear.updateValueAndValidity();
+      this.birthMonth.updateValueAndValidity();
+      this.birthDate.updateValueAndValidity();
+    });
   }
 }

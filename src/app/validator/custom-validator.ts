@@ -15,37 +15,52 @@ export class CustomValidator {
         return { unmatchPassword: null }
     }
 
+    public static inputCardNUmber(control: AbstractControl) {
+        let isInputCardNumber = false;
+        const cardNumber = control.get('cardNumber');
+
+        if (cardNumber!.value !== null || cardNumber!.value !== '') {
+            if (control.value === null && control.value === '' && control.value === 'null') {
+                let isInputCardNumber = true;
+            }
+        }
+        return isInputCardNumber ? { inputCardNumber: true }: null;
+    }
+
     public static requiredInCaseCardNumberInput(control: AbstractControl) {
         let isError = false;
         const firstName = control.get('firstName');
-        const lastName = control.get('lastName');
+        const tel = control.get('tel');
+        const birhtYear = control.get('birhtYear');
+        const birhtMonth = control.get('birhtMonth');
+        const birhtDate = control.get('birhtDate');
         const cardNumber = control.get('cardNumber');
 
-        if (cardNumber!.value == null || cardNumber!.value == '') {
-            console.log('hi');
-            return isError ? firstName!.setErrors({ requiredInCaseCardNumberInput: true }) : null;
-        }
-
         // カード番号が入力されたときにバリデーションが発動
-        if (cardNumber!.value !== null || cardNumber!.value !== '') {
-            console.log('ho');
-
+        if (cardNumber?.value !== null && cardNumber?.value !== '' && cardNumber?.value !== 'null') {
             // firstNameが空だった場合、エラーをセット
-            if (firstName!.value === null || firstName!.value === '') {
+            if (firstName!.value === null || firstName!.value === '' || firstName?.value === 'null') {
                 let isError = true;
-                console.log('he');
-
-                firstName!.setErrors({ requiredInCaseCardNumberInput: true });
+                firstName?.setErrors({ inputCardNumber: true });
             }
-
-            if (lastName!.value === null || lastName!.value === '') {
+            if (tel?.value === null || tel?.value === ''|| tel?.value === 'null') {
                 let isError = true;
-                console.log('he');
-
-                lastName!.setErrors({ requiredInCaseCardNumberInput: true });
+                tel?.setErrors({ inputCardNumber: true });
+            }
+            if (birhtYear?.value === null || birhtYear?.value === ''|| birhtYear?.value === 'null') {
+                let isError = true;
+                birhtYear?.setErrors({ inputCardNumber: true });
+            }
+            if (birhtMonth?.value === null || birhtMonth?.value === ''|| birhtMonth?.value === 'null') {
+                let isError = true;
+                birhtMonth?.setErrors({ inputCardNumber: true });
+            }
+            if (birhtDate?.value === null || birhtDate?.value === ''|| birhtDate?.value === 'null') {
+                let isError = true;
+                birhtDate?.setErrors({ inputCardNumber: true });
             }
         }
 
-        return null;
+        return isError ? { inputCardNumber: true }: null;
     }
 }
