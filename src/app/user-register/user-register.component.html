@@ -1,60 +1,44 @@
-<form [formGroup]="formGroup">
-    <ng-container>
-        <div>
-            <mat-form-field>
-                <mat-label>名前</mat-label>
-                <input matInput [errorStateMatcher]="matcher" type="text" [formControl]="firstName" placeholder="ヤマダ"/>
-                <mat-error *ngIf="firstName.invalid">{{ '必須項目です' }}</mat-error>
-            </mat-form-field>
-        </div>
+<form class="form-field" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- 名前のフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>名前</mat-label>
+        <input matInput placeholder="名前を入力してください" [formControl]="name">
+        <mat-error *ngIf="name.errors?.['maxLength']">10文字以内で入力してください。</mat-error>
+    </mat-form-field>
 
-        <div>
-            <mat-form-field>
-                <mat-label>電話番号</mat-label>
-                <input matInput [errorStateMatcher]="matcher" type="text" [formControl]="tel" placeholder="0312224444"/>
-                <mat-error *ngIf="tel.invalid">{{ '必須項目です' }}</mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="fill">
-                <mat-label>年</mat-label>
-                <mat-select [errorStateMatcher]="matcher" [formControl]="birthYear">
-                  <mat-option>
-                      {{ 2022 }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="birthYear.invalid"></mat-error>
-            </mat-form-field>
+    <!-- 住所のフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>住所</mat-label>
+        <input matInput placeholder="住所を入力してください" [formControl]="address">
+        <mat-error *ngIf="address.errors?.['required']">必須です。</mat-error>
+    </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>月</mat-label>
-                <mat-select [errorStateMatcher]="matcher" [formControl]="birthMonth">
-                  <mat-option>
-                      {{ 03 }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="birthMonth.invalid"></mat-error>
-            </mat-form-field>
+    <!-- 電話番号のフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>電話番号</mat-label>
+        <input matInput placeholder="電話番号を入力してください" [formControl]="phone">
+        <mat-error *ngIf="phone.errors?.['required']">必須です。</mat-error>
+    </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>日</mat-label>
-                <mat-select [errorStateMatcher]="matcher" [formControl]="birthDate">
-                    <mat-option>
-                        {{ 31 }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="birthDate.invalid"></mat-error>
-            </mat-form-field>
-            <p style="color: red;" *ngIf="birthYear.invalid || birthMonth.invalid || birthDate.invalid">{{ '必須項目です' }}</p>
-        </div>
+    <!-- メールアドレスのフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>メールアドレス</mat-label>
+        <input matInput placeholder="メールアドレスを入力してください" [formControl]="email">
+        <mat-error *ngIf="email.errors?.['required']">必須です。</mat-error>
+    </mat-form-field>
 
-        <div>
-            <mat-form-field>
-                <mat-label>カード番号</mat-label>
-                <input matInput type="text" [formControl]="cardNumber" placeholder="123412341234"/>
-                <mat-hint>カード番号を入力する場合は、姓(セイ)、名(メイ)、生年月日は必須です。カード登録と同じものを入力してください。</mat-hint>
-            <mat-error *ngIf="cardNumber.invalid">{{ '必須項目です' }}</mat-error>
-            </mat-form-field>
-        </div>
-    </ng-container>
+    <!-- パスワードのフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>パスワード</mat-label>
+        <input matInput placeholder="パスワードを入力してください" [formControl]="password">
+        <mat-error *ngIf="password.errors?.['required']">必須です。</mat-error>
+    </mat-form-field>
+
+    <!-- パスワード(確認用)のフォーム -->
+    <mat-form-field appearance="fill">
+        <mat-label>パスワード(確認用)</mat-label>
+        <input matInput placeholder="パスワード(確認用)を入力してください" [formControl]="passwordConfirm">
+        <mat-error *ngIf="passwordConfirm.errors?.['required']">必須です。</mat-error>
+    </mat-form-field>
+    <button class="form-button" mat-raised-button color="primary" [disabled]="registerForm.invalid">登録する</button>
 </form>

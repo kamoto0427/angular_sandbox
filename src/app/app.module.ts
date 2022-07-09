@@ -10,6 +10,8 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 // コンポーネント
 import { AppComponent } from './app.component';
@@ -18,13 +20,15 @@ import { BirthYearComponent } from './birth-year/birth-year.component';
 import { BirthMonthComponent } from './birth-month/birth-month.component';
 import { BirthDateComponent } from './birth-date/birth-date.component';
 import { BirthComponent } from './birth/birth.component';
+import { DateSelectComponent } from './date-select/date-select.component';
 import { PhoneComponent } from './phone/phone.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 
 const ROUTE_TABLE: Routes = [
   { path: 'userRegister', component: UserRegisterComponent },
   { path: 'birth-select', component: BirthSelectComponent },
-  { path: 'birth', component: BirthComponent }
+  { path: 'birth', component: BirthComponent },
+  { path: 'date', component: DateSelectComponent },
 ];
 
 @NgModule({
@@ -35,6 +39,7 @@ const ROUTE_TABLE: Routes = [
     BirthMonthComponent,
     BirthDateComponent,
     BirthComponent,
+    DateSelectComponent,
     PhoneComponent,
     UserRegisterComponent,
   ],
@@ -45,6 +50,8 @@ const ROUTE_TABLE: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule
   ],

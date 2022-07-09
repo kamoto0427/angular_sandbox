@@ -1,0 +1,26 @@
+<mat-form-field>
+    <mat-label>西暦</mat-label>
+    <mat-select (selectionChange)="changeYear($event)">
+      <mat-option *ngFor="let year of years" [value]="year">
+          {{ year }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>月</mat-label>
+    <mat-select (selectionChange)="changeMonth($event)">
+      <mat-option *ngFor="let month of monthes" [value]="month">
+          {{ month }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>日</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let day of days" [value]="day">
+          {{ day }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
