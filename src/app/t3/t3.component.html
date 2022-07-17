@@ -1,0 +1,7 @@
+<div class="member">
+    <div>会員情報を表示</div>
+    <div class="button-field">
+        <button>一般会員</button>
+        <button *ngIf="isGoldMember && point >= 100">ゴールド会員</button>
+    </div>
+</div>

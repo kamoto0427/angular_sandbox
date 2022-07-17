@@ -1,0 +1,12 @@
+<div *ngFor="let user of users">
+    {{ user.id }}
+    {{ user.name }}
+    {{ user.phone }}
+</div>
+
+<form style="width: 100%;" [formGroup]="userForm" (ngSubmit)="addUser(userForm.value)">
+    <input style="width: 100%;" type="text" formControlName="userId">
+    <input style="width: 100%;" type="text" formControlName="title">
+    <input style="width: 100%;" type="text" formControlName="body">
+    <button mat-raised-button color="primary">POST</button>
+</form>
