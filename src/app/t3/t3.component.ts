@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-t3',
@@ -6,14 +7,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./t3.component.css']
 })
 export class T3Component implements OnInit {
-  public isGoldMember: boolean = false;
-  public point: number;
+  public item: string | null;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.isGoldMember = true;
-    this.point = 0;
+
   }
 
+  /**
+   * トップ画面に遷移する
+   */
+  public onClickToTop() {
+    this.router.navigate(["/"]);
+  }
+
+  /**
+   * ユーザー登録画面に遷移する
+   */
+  public onClickToUserRegister() {
+    this.router.navigate(["/userRegister"]);
+  }
+
+  /**
+   * 企業一覧画面に遷移する
+   */
+  public onClickToCompany() {
+    this.router.navigate(["/company"]);
+  }
 }

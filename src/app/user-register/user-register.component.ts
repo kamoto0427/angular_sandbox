@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ErrorMessage } from 'src/app/common/errorMessege';
 
 @Component({
   selector: 'app-user-register',
@@ -7,6 +8,8 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit {
+  public errorMessage = ErrorMessage;
+
   public registerForm: FormGroup;
   public name: FormControl;
   public address: FormControl;
@@ -39,6 +42,5 @@ export class UserRegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('クリック');
   }
 }
