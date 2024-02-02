@@ -6,6 +6,10 @@
         <mat-error *ngIf="name.errors?.['maxLength']">{{ errorMessage.TENLIMITED }}</mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+        <input matInput type="date">
+    </mat-form-field>
+
     <!-- 住所のフォーム -->
     <mat-form-field appearance="fill">
         <mat-label>住所</mat-label>

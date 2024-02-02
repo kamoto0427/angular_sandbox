@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // コンポーネント
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { T1Component } from 'src/app/t1/t1.component';
 import { T3Component } from 'src/app/t3/t3.component';
 import { CompanyComponent } from 'src/app/company/company.component';
 import { StoreComponent } from 'src/app/store/store.component';
+import { TestT1Component } from './test-t1/test-t1.component';
 
 const ROUTE_TABLE: Routes = [
   { path: 'userRegister', component: UserRegisterComponent },
@@ -37,6 +39,7 @@ const ROUTE_TABLE: Routes = [
   { path: 't1', component: T1Component },
   { path: 't3', component: T3Component },
   { path: 'company', component: CompanyComponent },
+  { path: 'test-t1', component: TestT1Component },
 ];
 
 @NgModule({
@@ -54,6 +57,7 @@ const ROUTE_TABLE: Routes = [
     T3Component,
     CompanyComponent,
     StoreComponent,
+    TestT1Component,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,7 @@ const ROUTE_TABLE: Routes = [
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

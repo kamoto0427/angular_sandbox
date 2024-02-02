@@ -12,3 +12,7 @@ mat-form-field {
     display: block;
     width: 80%;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
